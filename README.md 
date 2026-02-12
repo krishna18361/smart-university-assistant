@@ -1,0 +1,26 @@
+#project description# Smart University Assistant
+
+Backend system built using Flask to handle university-related student queries.
+
+## Current Status
+Phase 1: Flask Backend Foundation (In Progress)
+
+## Features Implemented
+- Flask server setup
+- Basic API routes:
+  - `/` – Home route
+  - `/health` – Health check
+  - `/ask` – Accept student questions (dummy response)
+
+## Tech Stack (Planned)
+- Flask (Backend)
+- PostgreSQL (Structured data)
+- MongoDB (Unstructured data)
+- LLM integration
+- RAG pipeline
+
+## Project Goal
+To build an intelligent assistant capable of answering university queries using structured and unstructured data.
+
+## Author
+Krishna
