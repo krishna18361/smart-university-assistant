@@ -1,15 +1,12 @@
 #Flask app file
 from flask import Flask, request, jsonify
 
-# Create Flask application
 app = Flask(__name__)
 
-# Route 1: Home route
 @app.route("/")
 def home():
     return "Smart University Assistant API is running"
 
-# Route 2: Health route
 @app.route("/health")
 def health():
     return jsonify({
@@ -17,25 +14,41 @@ def health():
         "service": "Smart University Assistant"
     })
 
-# Route 3: Ask route
-@app.route("/ask", methods=["GET","POST"])
+
+@app.route("/ask", methods=["POST"])
 def ask():
 
-    # Get JSON data from request
+    # Step 1: Check if request has JSON
+    if not request.is_json:
+        return jsonify({
+            "error": "Request must be JSON"
+        }), 400
+
+    # Step 2: Get JSON data
     data = request.get_json()
 
-    # Extract question from JSON
+    # Step 3: Check if question exists
     question = data.get("question")
 
-    # Dummy answer (AI will come later)
-    answer = "This is a dummy response. AI integration will come later."
+    if not question:
+        return jsonify({
+            "error": "Question is required"
+        }), 400
 
-    # Send response
+    # Step 4: Check question type
+    if not isinstance(question, str):
+        return jsonify({
+            "error": "Question must be a string"
+        }), 400
+
+    # Step 5: Dummy response
+    answer = "This is a dummy response. Validation successful."
+
     return jsonify({
         "question": question,
         "answer": answer
-    })
+    }), 200
 
-# Run server
+
 if __name__ == "__main__":
     app.run(debug=True)
