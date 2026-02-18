@@ -1,7 +1,10 @@
 from flask import request, jsonify
+from services.question_service import process_question
+
 
 def ask_question():
 
+    # Validation layer
     if not request.is_json:
         return jsonify({
             "error": "Request must be JSON"
@@ -21,9 +24,7 @@ def ask_question():
             "error": "Question must be a string"
         }), 400
 
-    answer = "This is a dummy response. Validation successful."
+    # Call service layer
+    result = process_question(question)
 
-    return jsonify({
-        "question": question,
-        "answer": answer
-    }), 200
+    return jsonify(result), 200
