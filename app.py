@@ -1,20 +1,30 @@
 #Flask app file
 from flask import Flask, jsonify
 from routes.ask_routes import ask_question
+from config.settings import Config
 
 app = Flask(__name__)
+
+# Load configuration
+app.config["APP_NAME"] = Config.APP_NAME
+app.config["VERSION"] = Config.VERSION
+app.config["DEBUG"] = Config.DEBUG
 
 
 @app.route("/")
 def home():
-    return "Smart University Assistant API is running"
+    return jsonify({
+        "app": app.config["APP_NAME"],
+        "version": app.config["VERSION"],
+        "status": "running"
+    })
 
 
 @app.route("/health")
 def health():
     return jsonify({
         "status": "healthy",
-        "service": "Smart University Assistant"
+        "service": app.config["APP_NAME"]
     })
 
 
@@ -24,4 +34,4 @@ def ask():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=Config.DEBUG)

@@ -150,3 +150,22 @@ This structure prepares the system for:
 - MongoDB integration
 - LLM integration
 Without clean structure, adding database would become messy.
+-------------------------------------------------------------------------------------------------
+# Day 4 — Service Layer Introduction
+## What is Service Layer?
+Service layer contains business logic of the application.
+Routes should only handle HTTP requests.
+Services handle processing logic.
+## New Architecture
+app.py → registers routes
+routes/ → handles HTTP request
+services/ → handles business logic
+## Flow
+Client → route → service → response
+## Why service layer is important
+This prepares project for:
+- PostgreSQL integration
+- MongoDB integration
+- LLM integration
+Service layer keeps logic separate from routes.
+------------------------------------------------------------------------------
