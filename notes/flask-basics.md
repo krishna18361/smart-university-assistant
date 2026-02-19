@@ -169,3 +169,94 @@ This prepares project for:
 - LLM integration
 Service layer keeps logic separate from routes.
 ------------------------------------------------------------------------------
+# Day 5 — Configuration Layer and Final Flask Architecture
+Today we added a configuration layer to our Smart University Assistant backend.
+We created a new folder:
+config/
+and a new file:
+config/settings.py
+This file stores application settings such as:
+- App name
+- Version
+- Debug mode
+- Database configuration (for future PostgreSQL integration)
+This completes the Flask phase and prepares the project for database integration.
+## Why configuration layer is needed
+Before Day 5, configuration values were written directly inside app.py.
+Example:
+debug=True
+This is not good for large applications because:
+- Hard to manage settings
+- Hard to change settings later
+- Database configuration would become messy
+Configuration layer solves this problem by centralizing all settings.
+## What is configuration layer (simple explanation)
+Configuration layer is a separate place where application settings are stored.
+Instead of writing settings in app.py, we store them in:
+config/settings.py
+app.py loads settings from config file.
+This makes application clean and scalable.
+## What we implemented
+We created file:
+config/settings.py
+Code:
+class Config:
+    APP_NAME = "Smart University Assistant"
+    DEBUG = True
+    VERSION = "1.0.0"
+    DATABASE_CONFIG = {
+        "host": "localhost",
+        "port": 5432,
+        "database": "university_assistant",
+        "user": "postgres",
+        "password": "password"
+    }
+This class stores all application configuration.
+## How app.py uses configuration
+We imported Config into app.py:
+from config.settings import Config
+Then used it:
+app.config["APP_NAME"] = Config.APP_NAME
+app.config["VERSION"] = Config.VERSION
+app.config["DEBUG"] = Config.DEBUG
+This connects configuration layer to Flask app.
+## New project architecture after Day 5
+smart-university-assistant/
+│
+├── app.py              → starts Flask server
+│
+├── routes/             → handles HTTP requests
+│   └── ask_routes.py
+│
+├── services/           → contains business logic
+│   └── question_service.py
+│
+├── config/             → contains application configuration
+│   └── settings.py
+│
+├── notes/
+│
+└── venv/
+This is professional backend architecture.
+## Request flow after Day 5
+Client sends request:
+POST /ask
+Flow:
+Client → app.py → routes/ask_routes.py → services/question_service.py → Response
+Configuration is loaded from config/settings.py
+## Why __init__.py file was needed
+We created:
+__init__.py
+inside:
+config/
+routes/
+services/
+This tells Python these folders are packages.
+Without __init__.py, Python cannot import files from folders.
+## What we learned today
+We learned:
+1. What is configuration layer
+2. How to store application settings
+3. How to load configuration into Flask
+4. How professional backend architecture works
+5. How to prepare backend for database integration
