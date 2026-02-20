@@ -10,9 +10,9 @@ class Config:
 
     # Future database configuration (PostgreSQL)
     DATABASE_CONFIG = {
-        "host": "localhost",
-        "port": 5432,
-        "database": "university_assistant",
-        "user": "postgres",
-        "password": "password"
-    }
+    "host": "localhost",
+    "port": 5432,
+    "database": "university_assistant",
+    "user": "ananthakrishna",  # use your Mac username from whoami
+    "password": ""              # leave empty for Mac default
+}
