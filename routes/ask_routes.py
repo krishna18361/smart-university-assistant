@@ -1,7 +1,11 @@
 from flask import request, jsonify
 from services.question_service import process_question
+from services.db_service import get_all_questions
 
 
+def get_questions():
+    data = get_all_questions()
+    return jsonify(data), 200
 def ask_question():
 
     # Validation layer

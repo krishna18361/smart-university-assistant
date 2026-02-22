@@ -2,6 +2,7 @@
 from flask import Flask, jsonify
 from routes.ask_routes import ask_question
 from config.settings import Config
+from routes.ask_routes import ask_question, get_questions
 
 app = Flask(__name__)
 
@@ -18,6 +19,10 @@ def home():
         "version": app.config["VERSION"],
         "status": "running"
     })
+
+@app.route("/questions", methods=["GET"])
+def questions():
+    return get_questions()
 
 
 @app.route("/health")

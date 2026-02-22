@@ -39,3 +39,31 @@ def save_question(question, answer):
     connection.close()
 
     return True
+def get_all_questions():
+    connection = get_db_connection()
+
+    if connection is None:
+        return []
+
+    cursor = connection.cursor()
+
+    query = "SELECT id, question, answer, created_at FROM questions ORDER BY created_at DESC;"
+
+    cursor.execute(query)
+
+    rows = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    result = []
+
+    for row in rows:
+        result.append({
+            "id": row[0],
+            "question": row[1],
+            "answer": row[2],
+            "created_at": str(row[3])
+        })
+
+    return result
