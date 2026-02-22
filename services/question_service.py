@@ -1,9 +1,12 @@
+from services.db_service import save_question
+
+
 def process_question(question: str):
 
-    # This is where business logic lives
-    # Later this will connect to database and LLM
-
     answer = "This is a dummy response from service layer."
+
+    # Save to database
+    save_question(question, answer)
 
     return {
         "question": question,

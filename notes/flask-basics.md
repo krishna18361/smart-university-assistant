@@ -260,3 +260,4 @@ We learned:
 3. How to load configuration into Flask
 4. How professional backend architecture works
 5. How to prepare backend for database integration
+--------------------------------------------------------------------------------------
