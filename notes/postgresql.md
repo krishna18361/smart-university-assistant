@@ -18,3 +18,11 @@ Created db_service.py.
 Flask backend can now connect to PostgreSQL database.
 Connection tested successfully.
 This prepares backend for storing data.
+-------------------------------------------------------------------------------------
+# Day 8 — Created questions table and storing data
+
+Created questions table in PostgreSQL.
+
+Backend now stores student questions and answers.
+
+Database is now actively used by Flask backend.
