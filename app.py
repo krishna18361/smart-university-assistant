@@ -1,8 +1,13 @@
 #Flask app file
+# ...existing code...
 from flask import Flask, jsonify
-from routes.ask_routes import ask_question
 from config.settings import Config
-from routes.ask_routes import ask_question, get_questions
+from routes.ask_routes import ask_question, get_questions, get_single_question
+# ...existing code...
+from services.question_service import process_question
+from services.db_service import get_all_questions, get_question_by_id
+# ...existing code...
+# ...existing code...
 
 app = Flask(__name__)
 
@@ -19,6 +24,9 @@ def home():
         "version": app.config["VERSION"],
         "status": "running"
     })
+@app.route("/questions/<int:question_id>", methods=["GET"])
+def question_by_id(question_id):
+    return get_single_question(question_id)
 
 @app.route("/questions", methods=["GET"])
 def questions():

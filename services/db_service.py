@@ -67,3 +67,32 @@ def get_all_questions():
         })
 
     return result
+def get_question_by_id(question_id):
+    connection = get_db_connection()
+
+    if connection is None:
+        return None
+
+    cursor = connection.cursor()
+
+    query = """
+        SELECT id, question, answer, created_at
+        FROM questions
+        WHERE id = %s;
+    """
+
+    cursor.execute(query, (question_id,))
+    row = cursor.fetchone()
+
+    cursor.close()
+    connection.close()
+
+    if row is None:
+        return None
+
+    return {
+        "id": row[0],
+        "question": row[1],
+        "answer": row[2],
+        "created_at": str(row[3])
+    }

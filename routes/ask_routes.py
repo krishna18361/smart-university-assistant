@@ -1,11 +1,23 @@
 from flask import request, jsonify
 from services.question_service import process_question
 from services.db_service import get_all_questions
+from services.db_service import get_question_by_id
+
 
 
 def get_questions():
     data = get_all_questions()
     return jsonify(data), 200
+
+def get_single_question(question_id):
+    result = get_question_by_id(question_id)
+
+    if result is None:
+        return jsonify({
+            "error": "Question not found"
+        }), 404
+
+    return jsonify(result), 200
 def ask_question():
 
     # Validation layer
