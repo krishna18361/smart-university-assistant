@@ -26,3 +26,13 @@ Created questions table in PostgreSQL.
 Backend now stores student questions and answers.
 
 Database is now actively used by Flask backend.
+----------------------------------------------------------------------------------------
+# Day 9 — Fetching Data from Database
+
+Created get_all_questions() function.
+
+Added GET /questions route.
+
+Backend can now retrieve stored questions.
+
+System now supports both INSERT and SELECT operations.
