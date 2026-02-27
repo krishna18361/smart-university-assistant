@@ -163,3 +163,78 @@ PUT    /questions/<id>   → Update
 
 System now supports:
 CREATE + READ + UPDATE
+--------------------------------------------------------------------------------------
+---
+
+# Day 12 — Delete Endpoint (Full CRUD Complete)
+
+## What was implemented
+
+Added DELETE functionality to remove a question from the database using its ID.
+
+New endpoint:
+
+DELETE /questions/<id>
+
+Example:
+
+DELETE /questions/1
+
+
+## Backend Changes
+
+1. Added delete_question_by_id() in db_service.py
+
+This function:
+- Connects to PostgreSQL
+- Executes SQL DELETE query
+- Uses cursor.rowcount to check if a row was deleted
+- Returns True if deleted, False if record not found
+
+
+SQL Used:
+
+DELETE FROM questions WHERE id = %s;
+
+
+2. Added delete_question() in ask_routes.py
+
+This function:
+- Calls delete_question_by_id()
+- Returns 404 if question does not exist
+- Returns success message if deletion is successful
+
+
+## Example Response
+
+If successful:
+
+{
+  "message": "Question deleted successfully"
+}
+
+If record does not exist:
+
+{
+  "error": "Question not found"
+}
+
+
+## What I Learned
+
+- How DELETE method works in REST APIs
+- How SQL DELETE works
+- How cursor.rowcount verifies operation
+- How to return proper HTTP status codes
+- How to complete full CRUD in backend
+
+
+## API Status After Day 12
+
+POST   /ask              → Create  
+GET    /questions        → Read all  
+GET    /questions/<id>   → Read one  
+PUT    /questions/<id>   → Update  
+DELETE /questions/<id>   → Delete  
+
+Backend now supports FULL CRUD operations.
