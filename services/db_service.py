@@ -121,3 +121,22 @@ def update_question_by_id(question_id, new_question, new_answer):
     connection.close()
 
     return rows_updated > 0
+def delete_question_by_id(question_id):
+    connection = get_db_connection()
+
+    if connection is None:
+        return False
+
+    cursor = connection.cursor()
+
+    query = "DELETE FROM questions WHERE id = %s;"
+
+    cursor.execute(query, (question_id,))
+    connection.commit()
+
+    rows_deleted = cursor.rowcount
+
+    cursor.close()
+    connection.close()
+
+    return rows_deleted > 0

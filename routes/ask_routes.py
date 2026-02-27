@@ -3,6 +3,7 @@ from services.question_service import process_question
 from services.db_service import get_all_questions
 from services.db_service import get_question_by_id
 from services.db_service import update_question_by_id
+from services.db_service import delete_question_by_id
 
 
 
@@ -64,3 +65,12 @@ def update_question(question_id):
         return jsonify({"error": "Question not found"}), 404
 
     return jsonify({"message": "Question updated successfully"}), 200
+def delete_question(question_id):
+    print("DELETE ROUTE HIT")
+
+    deleted = delete_question_by_id(question_id)
+
+    if not deleted:
+        return jsonify({"error": "Question not found"}), 404
+
+    return jsonify({"message": "Question deleted successfully"}), 200

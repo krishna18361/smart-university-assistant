@@ -7,6 +7,7 @@ from routes.ask_routes import ask_question, get_questions, get_single_question
 from services.question_service import process_question
 from services.db_service import get_all_questions, get_question_by_id
 from routes.ask_routes import ask_question, get_questions, get_single_question, update_question
+from routes.ask_routes import ask_question, get_questions, get_single_question, update_question, delete_question
 # ...existing code...
 # ...existing code...
 
@@ -36,6 +37,10 @@ def update_question_route(question_id):
 @app.route("/questions", methods=["GET"])
 def questions():
     return get_questions()
+
+@app.route("/questions/<int:question_id>", methods=["DELETE"])
+def delete_question_route(question_id):
+    return delete_question(question_id)
 
 
 @app.route("/health")
