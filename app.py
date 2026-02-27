@@ -6,6 +6,7 @@ from routes.ask_routes import ask_question, get_questions, get_single_question
 # ...existing code...
 from services.question_service import process_question
 from services.db_service import get_all_questions, get_question_by_id
+from routes.ask_routes import ask_question, get_questions, get_single_question, update_question
 # ...existing code...
 # ...existing code...
 
@@ -27,6 +28,10 @@ def home():
 @app.route("/questions/<int:question_id>", methods=["GET"])
 def question_by_id(question_id):
     return get_single_question(question_id)
+
+@app.route("/questions/<int:question_id>", methods=["PUT"])
+def update_question_route(question_id):
+    return update_question(question_id)
 
 @app.route("/questions", methods=["GET"])
 def questions():

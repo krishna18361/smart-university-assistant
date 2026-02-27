@@ -96,3 +96,28 @@ def get_question_by_id(question_id):
         "answer": row[2],
         "created_at": str(row[3])
     }
+def update_question_by_id(question_id, new_question, new_answer):
+    connection = get_db_connection()
+
+    if connection is None:
+        return False
+
+    cursor = connection.cursor()
+
+    query = """
+        UPDATE questions
+        SET question = %s,
+            answer = %s
+        WHERE id = %s;
+    """
+
+    cursor.execute(query, (new_question, new_answer, question_id))
+
+    connection.commit()
+
+    rows_updated = cursor.rowcount
+
+    cursor.close()
+    connection.close()
+
+    return rows_updated > 0
