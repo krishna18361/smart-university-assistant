@@ -238,3 +238,65 @@ PUT    /questions/<id>   → Update
 DELETE /questions/<id>   → Delete  
 
 Backend now supports FULL CRUD operations.
+--------------------------------------------------------------------------------------------------------
+---
+
+# Day 13 — Backend Robustness Improvements
+
+## What was implemented
+
+Improved database functions using try/except/finally blocks to make backend safer and production-ready.
+
+## Changes Made
+
+1. Updated all database functions:
+   - save_question()
+   - get_all_questions()
+   - update_question_by_id()
+   - delete_question_by_id()
+
+2. Added try/except/finally structure
+
+Pattern used:
+
+cursor = None
+
+try:
+    # database operation
+
+except Exception as e:
+    print("Error:", e)
+
+finally:
+    if cursor:
+        cursor.close()
+    connection.close()
+
+
+## Why this is important
+
+Before:
+- Errors could crash the backend
+- Connections might not close properly
+
+After:
+- Errors are handled safely
+- Connections always close
+- Backend becomes stable
+
+
+## What I Learned
+
+- Defensive programming in backend
+- Importance of try/except/finally
+- Writing production-safe database code
+- How to prevent backend crashes
+
+
+## Result
+
+Backend is now:
+- Stable
+- Safe
+- Clean
+- Production-ready (basic level)

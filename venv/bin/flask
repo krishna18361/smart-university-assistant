@@ -1,4 +1,4 @@
-#!/Users/ananthakrishna/Desktop/LLm_PROJECT/smart_university_assistant/venv/bin/python3
+#!/Users/ananthakrishna/Desktop/smart-university-assistant/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
