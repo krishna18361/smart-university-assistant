@@ -12,7 +12,7 @@ def get_mongo_client():
         print(f"MongoDB connection failed: {e}")
         return None
 
-def save_chat_history(chat_id, question, answer):
+def save_chat_history(chat_id, question, answer, file_info=None):
     client = get_mongo_client()
     if not client:
         return False
@@ -27,6 +27,7 @@ def save_chat_history(chat_id, question, answer):
             "role": "user",
             "question": question,
             "answer": None,
+            "file": file_info,
             "timestamp": datetime.utcnow()
         }
         collection.insert_one(user_message)

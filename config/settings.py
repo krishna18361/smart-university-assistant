@@ -8,6 +8,8 @@ class Config:
     APP_NAME = "Smart University Assistant"
     DEBUG = os.getenv("DEBUG", "True") == "True"
     VERSION = "1.0.0"
+    SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key-change-this-in-production")
+    UPLOAD_FOLDER = "uploads"
 
     # PostgreSQL Configuration
     DATABASE_CONFIG = {
